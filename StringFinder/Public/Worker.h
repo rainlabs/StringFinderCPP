@@ -9,10 +9,10 @@
 #include "ResultWriter.h"
 #include "StringFinder.h"
 
-class ThreadWorker
+class Worker
 {
 public:
-	ThreadWorker(const Configuration& oConfig, const FString& sFile);
+	Worker(const Configuration& oConfig, const FString& sFile);
 
 	void Run();
 

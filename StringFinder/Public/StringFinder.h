@@ -5,6 +5,7 @@
 #pragma once
 
 #include "CommonTypes.h"
+#include <functional>
 
 class StringFinder
 {
@@ -14,6 +15,7 @@ public:
 
 	bool IsOpen() const;
 	size_t FindString(const FString& sSubString);
+	void FindAllStrings(const FString& sSubString, std::function<void(const FString& sLine, size_t uLine)> fFunction);
 
 protected:
 	void ResetFile();

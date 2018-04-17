@@ -38,9 +38,6 @@
     <ClCompile Include="Private\StringFinder.cpp">
       <Filter>Private</Filter>
     </ClCompile>
-    <ClCompile Include="Private\ThreadWorker.cpp">
-      <Filter>Private</Filter>
-    </ClCompile>
     <ClCompile Include="Private\Windows\PlatformPathFinder.cpp">
       <Filter>Private\Windows</Filter>
     </ClCompile>
@@ -56,6 +53,12 @@
     <ClCompile Include="Private\Interfaces\ResultWriter.cpp">
       <Filter>Private\Interfaces</Filter>
     </ClCompile>
+    <ClCompile Include="Private\Worker.cpp">
+      <Filter>Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Measurement.cpp">
+      <Filter>Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Public\CommonTypes.h">
@@ -65,9 +68,6 @@
       <Filter>Public</Filter>
     </ClInclude>
     <ClInclude Include="Public\StringFinder.h">
-      <Filter>Public</Filter>
-    </ClInclude>
-    <ClInclude Include="Public\ThreadWorker.h">
       <Filter>Public</Filter>
     </ClInclude>
     <ClInclude Include="Public\Windows\PlatformPathFinder.h">
@@ -87,6 +87,15 @@
     </ClInclude>
     <ClInclude Include="Private\ResultWriters\PlainResultWriter.h">
       <Filter>Private\ResultWriters</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Worker.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Measurement.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Strings.h">
+      <Filter>Public</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

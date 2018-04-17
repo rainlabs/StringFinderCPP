@@ -31,4 +31,5 @@ private:
 	FString m_sFileMask;
 	FString m_sFindString;
 	FString m_sOutputFile;
+	bool m_bValidOutputFile;
 };

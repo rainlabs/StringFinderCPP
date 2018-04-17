@@ -8,7 +8,8 @@ Configuration::Configuration() :
 	m_sPath(_S("")),
 	m_sFileMask(_S("")),
 	m_sFindString(_S("")),
-	m_sOutputFile(_S(""))
+	m_sOutputFile(_S("")),
+	m_bValidOutputFile(false)
 {
 }
 
@@ -16,7 +17,8 @@ Configuration::Configuration(int argc, char * argv[]) :
 	m_sPath(_S("")),
 	m_sFileMask(_S("")),
 	m_sFindString(_S("")),
-	m_sOutputFile(_S(""))
+	m_sOutputFile(_S("")),
+	m_bValidOutputFile(false)
 {
 	Initialize(argc, argv);
 }
@@ -48,6 +50,15 @@ void Configuration::Initialize(int argc, char * argv[])
 			}
 		}
 	}
+
+	// Truncate output file
+	if (!m_sOutputFile.empty()) {
+		FFile oFile(m_sOutputFile, FFile::out | FFile::trunc);
+		if (oFile.is_open()) {
+			m_bValidOutputFile = true;
+			oFile.close();
+		}
+	}
 }
 
 FString Configuration::GetPath() const
@@ -72,6 +83,8 @@ FString Configuration::GetOutputFile() const
 
 FileFormat Configuration::GetOutputFormat() const
 {
+	if (!m_bValidOutputFile) return FileFormat::CONSOLE;
+
 	return FileFormat::PLAIN_TEXT;
 }
 

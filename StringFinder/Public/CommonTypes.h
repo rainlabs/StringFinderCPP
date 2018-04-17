@@ -11,16 +11,27 @@
 enum class FileFormat : unsigned short
 {
 	PLAIN_TEXT, // .txt
-	MARKDOWN,   // .md
 	CONSOLE     // raw output
 };
 
 enum ErrorCode
 {
 	SUCCESS = 0,
-	INVALID_PATH,
-	INVALID_MASK,
-	INVALID_FIND_STRING,
-	INVALID_INPUT_FILE,
 	INVALID_ARGUMENTS
+};
+
+struct Utils
+{
+	static void WriteInConsole(const FString& sError) {
+		if (sError.empty()) return;
+
+		COUT << sError << std::endl;
+	};
+
+	template<typename T>
+	static void WriteInConsole(const FString& sError, T code) {
+		if (sError.empty()) return;
+
+		COUT << sError << code << std::endl;
+	};
 };

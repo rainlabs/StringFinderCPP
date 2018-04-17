@@ -130,10 +130,11 @@
     <ClCompile Include="Private\Configuration.cpp" />
     <ClCompile Include="Private\Interfaces\PathFinder.cpp" />
     <ClCompile Include="Private\Interfaces\ResultWriter.cpp" />
+    <ClCompile Include="Private\Measurement.cpp" />
     <ClCompile Include="Private\ResultWriters\ConsoleResultWriter.cpp" />
     <ClCompile Include="Private\ResultWriters\PlainResultWriter.cpp" />
     <ClCompile Include="Private\StringFinder.cpp" />
-    <ClCompile Include="Private\ThreadWorker.cpp" />
+    <ClCompile Include="Private\Worker.cpp" />
     <ClCompile Include="Private\Windows\PlatformPathFinder.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -143,8 +144,10 @@
     <ClInclude Include="Public\Configuration.h" />
     <ClInclude Include="Public\Interfaces\PathFinder.h" />
     <ClInclude Include="Public\Interfaces\ResultWriter.h" />
+    <ClInclude Include="Public\Measurement.h" />
     <ClInclude Include="Public\StringFinder.h" />
-    <ClInclude Include="Public\ThreadWorker.h" />
+    <ClInclude Include="Public\Strings.h" />
+    <ClInclude Include="Public\Worker.h" />
     <ClInclude Include="Public\Windows\PlatformPathFinder.h" />
     <ClInclude Include="Public\Windows\PlatformTypes.h" />
   </ItemGroup>

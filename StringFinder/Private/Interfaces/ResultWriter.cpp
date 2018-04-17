@@ -11,8 +11,6 @@ ResultWriterPtr ResultWriter::CreateInstance(const FString& sFile, FileFormat eF
 	switch (eFormat) {
 	case FileFormat::PLAIN_TEXT:
 		return std::make_shared<PlainResultWriter>(PlainResultWriter(sFile));
-	case FileFormat::MARKDOWN:
-		break;
 	}
 	
 	return std::make_shared<ConsoleResultWriter>(ConsoleResultWriter(sFile));

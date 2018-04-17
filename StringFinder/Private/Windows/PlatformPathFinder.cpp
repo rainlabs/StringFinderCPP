@@ -53,7 +53,6 @@ PlatformPathFinder::PlatformPathFinder(const FString & sPath, const FString & sM
 bool PlatformPathFinder::CheckValidName(const FString & sName, unsigned int iAttrib)
 {
 	if (sName.empty()) return false;
-	//if (iAttrib & _A_SUBDIR) return false;
 	if (sName == _S(".")) return false;
 	if (sName == _S("..")) return false;
 
@@ -62,8 +61,6 @@ bool PlatformPathFinder::CheckValidName(const FString & sName, unsigned int iAtt
 		if (iAttrib & _A_HIDDEN) return false;
 		if (sName[0] == _S('.')) return false;
 	}
-
-	// check regex
 
 	return true;
 }

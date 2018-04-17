@@ -41,6 +41,20 @@ size_t StringFinder::FindString(const FString & sSubString)
 	return 0;
 }
 
+void StringFinder::FindAllStrings(const FString & sSubString, std::function<void(const FString& sLine, size_t uLine)> fFunction)
+{
+	size_t uLine(0);
+	FString sReadLine;
+
+	while (std::getline(m_oFile, sReadLine)) {
+		uLine++;
+		size_t uFound = sReadLine.find(sSubString);
+		if (uFound != FString::npos) {
+			fFunction(sReadLine, uLine);
+		}
+	}
+}
+
 void StringFinder::ResetFile()
 {
 	m_oFile.clear();

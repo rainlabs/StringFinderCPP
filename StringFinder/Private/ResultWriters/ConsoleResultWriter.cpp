@@ -3,10 +3,11 @@
 // Copyright 2018 All Rights Reserved.
 
 #include "ConsoleResultWriter.h"
+#include "Strings.h"
 
 ConsoleResultWriter::ConsoleResultWriter(const ConsoleResultWriter & oCopy) :
 	ResultWriter(oCopy),
-	m_sSegment(_S(""))
+	m_sSegment(STR_EMPTY)
 {
 }
 
@@ -24,13 +25,15 @@ void ConsoleResultWriter::SetSegment(const FString & sSegment)
 
 void ConsoleResultWriter::Write(const FString & sOutput, size_t uPos)
 {
-	m_oStream << sOutput << _S(":") << uPos << std::endl;
+	m_oStream << STR_TAB << uPos << STR_DELIMETER << sOutput << std::endl;
 }
 
 bool ConsoleResultWriter::Commit()
 {
+	if (m_oStream.tellp() < 1) return false;
+
 	if(!m_sSegment.empty())
-		COUT << _S("File: ") << m_sSegment << std::endl;
+		COUT << STR_SEGMENT_HEADER << m_sSegment << std::endl;
 	COUT << m_oStream.str();
 
 	m_oStream.str(FString()); // Clear
@@ -39,6 +42,6 @@ bool ConsoleResultWriter::Commit()
 
 ConsoleResultWriter::ConsoleResultWriter(const FString & sFile) :
 	ResultWriter(sFile),
-	m_sSegment(_S(""))
+	m_sSegment(STR_EMPTY)
 {
 }
