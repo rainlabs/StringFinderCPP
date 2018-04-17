@@ -24,6 +24,7 @@ size_t PlatformPathFinder::Iterate(std::function<void(const FString&)> fFunction
 	}
 
 	intptr_t hFile = _wfindfirst((sCurrentFolder + _S("*")).c_str(), &oFindData);
+	if (hFile == INVALID_HANDLE_VALUE) return 0;
 
 	FString sMaskInternal(m_sMask);
 	if (m_sMask[0] == _S('*')) {
@@ -38,8 +39,6 @@ size_t PlatformPathFinder::Iterate(std::function<void(const FString&)> fFunction
 	catch (std::regex_error e) {
 		Utils::WriteInConsole(STR_INCORRECT_MASK);
 	}
-
-	if (hFile == INVALID_HANDLE_VALUE) return 0;
 
 	// Recursive iteration
 	// TODO: for optimization find all files first and iterate over vector
@@ -57,6 +56,7 @@ size_t PlatformPathFinder::Iterate(std::function<void(const FString&)> fFunction
 		}
 	} while (_wfindnext(hFile, &oFindData) == 0);
 
+	_findclose(hFile);
 	return uCount;
 }
 
