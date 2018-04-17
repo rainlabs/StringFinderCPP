@@ -55,6 +55,7 @@ size_t PlatformPathFinder::Iterate(std::function<void(const FString&)> fFunction
         }
     }
 
+    closedir(hDir);
 	return uCount;
 }
 
