@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Private">
+      <UniqueIdentifier>{d3d74563-c1aa-4315-b68e-917007348899}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Public\Interfaces">
+      <UniqueIdentifier>{4c2eef57-0083-4f3e-9cfc-23a7d540d425}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Public\Windows">
+      <UniqueIdentifier>{df201264-ce2d-47c8-b450-8ba8f7492552}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Interfaces">
+      <UniqueIdentifier>{656d88ca-272e-4d5a-9cda-264fbce5e367}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\Windows">
+      <UniqueIdentifier>{ab804501-4f44-4513-b46b-35eedfede92e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Private\ResultWriters">
+      <UniqueIdentifier>{62cd852b-00f7-4dfe-a9de-1e37342b2ef9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Configuration.cpp">
+      <Filter>Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\StringFinder.cpp">
+      <Filter>Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\ThreadWorker.cpp">
+      <Filter>Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Windows\PlatformPathFinder.cpp">
+      <Filter>Private\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\ResultWriters\ConsoleResultWriter.cpp">
+      <Filter>Private\ResultWriters</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\ResultWriters\PlainResultWriter.cpp">
+      <Filter>Private\ResultWriters</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Interfaces\PathFinder.cpp">
+      <Filter>Private\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="Private\Interfaces\ResultWriter.cpp">
+      <Filter>Private\Interfaces</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Public\CommonTypes.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Configuration.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\StringFinder.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\ThreadWorker.h">
+      <Filter>Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Windows\PlatformPathFinder.h">
+      <Filter>Public\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Windows\PlatformTypes.h">
+      <Filter>Public\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Interfaces\PathFinder.h">
+      <Filter>Public\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Public\Interfaces\ResultWriter.h">
+      <Filter>Public\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Private\ResultWriters\ConsoleResultWriter.h">
+      <Filter>Private\ResultWriters</Filter>
+    </ClInclude>
+    <ClInclude Include="Private\ResultWriters\PlainResultWriter.h">
+      <Filter>Private\ResultWriters</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
