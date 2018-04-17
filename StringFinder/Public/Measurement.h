@@ -8,6 +8,7 @@
 #include <chrono>
 #include <functional>
 
+/* Simple measuremnt block */
 struct Measurement
 {
 	static float Measure(std::function<void()> fFunction);

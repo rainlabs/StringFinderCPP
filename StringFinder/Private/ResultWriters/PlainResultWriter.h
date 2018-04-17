@@ -22,9 +22,9 @@ protected:
 	PlainResultWriter(const FString& sFile);
 
 private:
-	FFile m_oFile;
-	FString m_sSegment;
-	FStringStream m_oStream;
+	FFile m_oFile;             // Output file
+	FString m_sSegment;        // Saved segment
+	FStringStream m_oStream;   // Write buffer
 
-	FString m_sFilename;
+	FString m_sFilename;       // Output file name
 };

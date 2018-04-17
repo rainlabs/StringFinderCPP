@@ -8,18 +8,21 @@
 #include <algorithm>
 #include <iterator>
 
+// Available file formats
 enum class FileFormat : unsigned short
 {
-	PLAIN_TEXT, // .txt
+	PLAIN_TEXT, // file output
 	CONSOLE     // raw output
 };
 
+// Common Error codes
 enum ErrorCode
 {
 	SUCCESS = 0,
 	INVALID_ARGUMENTS
 };
 
+// Helper function to output info into console
 struct Utils
 {
 	static void WriteInConsole(const FString& sError) {

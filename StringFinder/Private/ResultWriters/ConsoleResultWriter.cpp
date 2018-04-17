@@ -30,8 +30,6 @@ void ConsoleResultWriter::Write(const FString & sOutput, size_t uPos)
 
 bool ConsoleResultWriter::Commit()
 {
-	if (m_oStream.tellp() < 1) return false;
-
 	if(!m_sSegment.empty())
 		COUT << STR_SEGMENT_HEADER << m_sSegment << std::endl;
 	COUT << m_oStream.str();

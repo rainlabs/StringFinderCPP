@@ -9,11 +9,13 @@
 #include "ResultWriter.h"
 #include "StringFinder.h"
 
+/* Worker finder class (can be used for multithreading) */
 class Worker
 {
 public:
 	Worker(const Configuration& oConfig, const FString& sFile);
 
+	// Find string in file and write into output
 	void Run();
 
 protected:

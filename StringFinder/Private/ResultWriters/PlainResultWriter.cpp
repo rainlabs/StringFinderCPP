@@ -38,7 +38,6 @@ void PlainResultWriter::Write(const FString & sOutput, size_t uPos)
 bool PlainResultWriter::Commit()
 {
 	if (!IsOpen()) return false;
-	if (m_oStream.tellp() < 1) return false;
 
 	if(!m_sSegment.empty())
 		m_oFile << STR_SEGMENT_HEADER << m_sSegment << std::endl;

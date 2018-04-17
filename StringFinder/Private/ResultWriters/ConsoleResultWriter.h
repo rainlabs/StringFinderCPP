@@ -22,6 +22,6 @@ protected:
 	ConsoleResultWriter(const FString& sFile);
 
 private:
-	FString m_sSegment;
-	FStringStream m_oStream;
+	FString m_sSegment;       // Saved segment
+	FStringStream m_oStream;  // Write buffer
 };

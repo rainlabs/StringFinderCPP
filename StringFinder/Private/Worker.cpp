@@ -15,9 +15,20 @@ Worker::Worker(const Configuration & oConfig, const FString & sFile) :
 
 void Worker::Run()
 {
-	m_oStringFinder.FindAllStrings(m_oConfig.GetFindString(), [&](const FString sLine, size_t uLine) {
-		m_pResultWriter->Write(sLine, uLine);
-	});
+	if (m_oConfig.IsExtendedOutput()) {
+		bool bFound(false);
+		m_oStringFinder.FindAllStrings(m_oConfig.GetFindString(), [&](const FString sLine, size_t uLine) {
+			m_pResultWriter->Write(sLine, uLine);
+			bFound = true;
+		});
 
-	m_pResultWriter->Commit();
+		if(bFound)
+			m_pResultWriter->Commit();
+	}
+	else {
+		size_t uLine = m_oStringFinder.FindString(m_oConfig.GetFindString());
+		if (uLine > 0) {
+			m_pResultWriter->Commit();
+		}
+	}
 }
