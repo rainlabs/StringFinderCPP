@@ -29,8 +29,6 @@ void ConsoleResultWriter::Write(const FString & sOutput, size_t uPos)
 
 bool ConsoleResultWriter::Commit()
 {
-	if (!IsOpen()) return false;
-
 	if(!m_sSegment.empty())
 		COUT << _S("File: ") << m_sSegment << std::endl;
 	COUT << m_oStream.str();

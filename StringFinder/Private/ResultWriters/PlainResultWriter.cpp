@@ -6,7 +6,7 @@
 
 PlainResultWriter::PlainResultWriter(const PlainResultWriter & oCopy) :
 	ResultWriter(oCopy),
-	m_oFile(oCopy.m_sFilename, FFile::out),
+	m_oFile(oCopy.m_sFilename, FFile::out | FFile::app),
 	m_sSegment(_S("")),
 	m_sFilename(oCopy.m_sFilename)
 {
@@ -30,7 +30,8 @@ void PlainResultWriter::SetSegment(const FString & sSegment)
 
 void PlainResultWriter::Write(const FString & sOutput, size_t uPos)
 {
-	m_oStream << sOutput << _S(":") << uPos << std::endl;
+	m_oStream << _S("\t") << sOutput << _S(":") << uPos << std::endl;
+	
 }
 
 bool PlainResultWriter::Commit()

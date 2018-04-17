@@ -18,7 +18,6 @@ void ThreadWorker::Run()
 	size_t uLine = m_oStringFinder.FindString(m_oConfig.GetFindString());
 	if (uLine > 0) {
 		m_pResultWriter->Write(m_sFile, uLine);
+		m_pResultWriter->Commit();
 	}
-
-	m_pResultWriter->Commit();
 }

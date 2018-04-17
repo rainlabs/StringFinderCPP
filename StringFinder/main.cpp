@@ -17,11 +17,12 @@ int main(int argc, char* argv[])
 	if (!oConfig.IsValid()) return ErrorCode::INVALID_ARGUMENTS;
 
 	PathFinderPtr pFinder = PathFinder::CreateInstance(oConfig.GetPath(), oConfig.GetFileMask());
-	ResultWriterPtr pWriter = ResultWriter::CreateInstance(oConfig.GetOutputFile(), FileFormat::PLAIN_TEXT);
+	ResultWriterPtr pWriter = ResultWriter::CreateInstance(oConfig.GetOutputFile(), FileFormat::CONSOLE);
 	FString sFolder;
 	pFinder->Iterate([&](const FString& sFile) {
 		ThreadWorker oWorker(oConfig, sFile);
-		std::async(std::launch::async, &ThreadWorker::Run, &oWorker);
+		//std::async(std::launch::async, &ThreadWorker::Run, &oWorker);
+		oWorker.Run();
 	});
 
 	auto end = std::chrono::system_clock::now();
