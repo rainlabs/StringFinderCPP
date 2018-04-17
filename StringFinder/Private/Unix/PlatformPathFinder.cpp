@@ -5,6 +5,7 @@
 #include "PlatformPathFinder.h"
 #include <sys/types.h>
 #include <dirent.h>
+#include <regex>
 #include "Strings.h"
 
 #define INVALID_HANDLE_VALUE -1
@@ -33,7 +34,7 @@ size_t PlatformPathFinder::Iterate(std::function<void(const FString&)> fFunction
 	}
 
 	// Check for valid to regex mask
-    std::wregex rMask;
+    std::regex rMask;
     try {
 		rMask = sMaskInternal;
 	}

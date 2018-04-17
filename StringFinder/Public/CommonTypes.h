@@ -36,5 +36,5 @@ struct Utils
 		if (sError.empty()) return;
 
 		COUT << sError << code << std::endl;
-	};
+    }
 };
