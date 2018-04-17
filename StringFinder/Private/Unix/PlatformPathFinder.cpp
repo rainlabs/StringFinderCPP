@@ -20,8 +20,8 @@ size_t PlatformPathFinder::Iterate(std::function<void(const FString&)> fFunction
     struct dirent* pDirent;
 	FString sCurrentFolder(m_sPath);
 
-	if (sCurrentFolder[sCurrentFolder.size() - 1] != _S('\\')) {
-		sCurrentFolder += _S('\\');
+    if (sCurrentFolder[sCurrentFolder.size() - 1] != _S('/')) {
+        sCurrentFolder += _S('/');
 	}
 
     DIR* hDir = opendir(sCurrentFolder.c_str());

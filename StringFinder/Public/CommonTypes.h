@@ -37,4 +37,11 @@ struct Utils
 
 		COUT << sError << code << std::endl;
     }
+
+    // trim from end (like \n in unix file)
+    static inline void rtrim(FString &s) {
+        s.erase(std::find_if(s.rbegin(), s.rend(), [](FChar ch) {
+            return ch != _S('\n'); // TODO: std::isspace
+        }).base(), s.end());
+    }
 };

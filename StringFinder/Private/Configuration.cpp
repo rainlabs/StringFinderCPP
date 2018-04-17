@@ -32,7 +32,6 @@ Configuration::~Configuration()
 // TODO: write a decorator for parameters
 void Configuration::Initialize(int argc, char * argv[])
 {
-	// MyApp.exe -p “C:\Temp” -m “*.*” -i “String.txt” -o “Result.txt”,
 	for (int i = 0; i < argc; i++) {
 		FString sParam(PlatformUtils::StringFormat(argv[i]));
 
@@ -65,6 +64,10 @@ void Configuration::Initialize(int argc, char * argv[])
 	if (!m_sPath.empty() && m_sPath[m_sPath.size()-1] == _S('*')) {
 		m_sPath.resize(m_sPath.size() - 1);
 	}
+
+    if(!m_sFindString.empty()) {
+        Utils::rtrim(m_sFindString);
+    }
 
 	// Truncate output file
 	if (!m_sOutputFile.empty()) {
