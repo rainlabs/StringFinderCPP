@@ -12,6 +12,12 @@ int main(int argc, char* argv[])
 {
 	Configuration oConfig(argc, argv); // Parse arguments
 
+	// Show help and close app normally
+	if (oConfig.ShowHelp()) {
+		Utils::WriteHelp();
+		return ErrorCode::SUCCESS;
+	}
+
 	// Check paramenters is valid
 	if (!oConfig.IsValid()) {
 		Utils::WriteInConsole(STR_INVALID_ARGUMENTS);
@@ -29,8 +35,10 @@ int main(int argc, char* argv[])
 	});
 
 	// Simple measurement result
-	Utils::WriteInConsole(STR_MEASURE, fDuration); 
-	Utils::WriteInConsole(STR_FOUND_FILES, uFoundFiles);
+	if (oConfig.ShowInfo()) {
+		Utils::WriteInConsole(STR_MEASURE, fDuration); 
+		Utils::WriteInConsole(STR_FOUND_FILES, uFoundFiles);
+	}
 
 	return ErrorCode::SUCCESS;
 }

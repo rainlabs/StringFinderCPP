@@ -10,7 +10,9 @@ Configuration::Configuration() :
 	m_sFindString(_S("")),
 	m_sOutputFile(_S("")),
 	m_bOutputExtended(false),
-	m_bValidOutputFile(false)
+	m_bValidOutputFile(false),
+	m_bShowInfo(false),
+	m_bShowHelp(false)
 {
 }
 
@@ -20,7 +22,9 @@ Configuration::Configuration(int argc, char * argv[]) :
 	m_sFindString(_S("")),
 	m_sOutputFile(_S("")),
 	m_bOutputExtended(false),
-	m_bValidOutputFile(false)
+	m_bValidOutputFile(false),
+	m_bShowInfo(false),
+	m_bShowHelp(false)
 {
 	Initialize(argc, argv);
 }
@@ -38,23 +42,33 @@ void Configuration::Initialize(int argc, char * argv[])
 		if (sParam.size() == 2 && sParam[0] == _S('-')) {
 			switch (sParam[1]) {
 			case _S('p'):
-				if(i < (argc+1))
+				if(i < (argc - 1))
 					m_sPath = PlatformUtils::StringFormat(argv[++i]);
 				break;
 			case _S('m'):
-				if (i < (argc + 1))
+				if (i < (argc - 1))
 					m_sFileMask = PlatformUtils::StringFormat(argv[++i]);
 				break;
 			case _S('i'):
-				if (i < (argc + 1))
+				if (i < (argc - 1) && m_sFindString.empty())
 					m_sFindString = ReadFindString(PlatformUtils::StringFormat(argv[++i]));
 				break;
+			case _S('s'):
+				if (i < (argc - 1) && m_sFindString.empty())
+					m_sFindString = PlatformUtils::StringFormat(argv[++i]);
+				break;
 			case _S('o'):
-				if (i < (argc + 1))
+				if (i < (argc - 1))
 					m_sOutputFile = PlatformUtils::StringFormat(argv[++i]);
 				break;
 			case _S('a'):
 				m_bOutputExtended = true;
+				break;
+			case _S('d'):
+				m_bShowInfo = true;
+				break;
+			case _S('h'):
+				m_bShowHelp = true;
 				break;
 			}
 		}
@@ -114,6 +128,16 @@ bool Configuration::IsValid() const
 bool Configuration::IsExtendedOutput() const
 {
 	return m_bOutputExtended;
+}
+
+bool Configuration::ShowInfo() const
+{
+	return m_bShowInfo;
+}
+
+bool Configuration::ShowHelp() const
+{
+	return m_bShowHelp;
 }
 
 FString Configuration::ReadFindString(const FString & sFile) const

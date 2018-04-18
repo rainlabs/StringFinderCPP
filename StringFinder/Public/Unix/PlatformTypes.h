@@ -26,10 +26,10 @@ typedef char FChar;                        // Base char
 class PlatformUtils
 {
 public:
-        // Convert raw string into FString
-        static inline FString StringFormat(const std::string& sIn) {
-                return sIn;
-        }
+    // Convert raw string into FString
+    static inline FString StringFormat(const std::string& sIn) {
+        return sIn;
+    }
 };
 
 

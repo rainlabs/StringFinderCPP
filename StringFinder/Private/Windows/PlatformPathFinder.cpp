@@ -7,8 +7,6 @@
 #include <regex>
 #include "Strings.h"
 
-#define INVALID_HANDLE_VALUE -1
-
 PlatformPathFinder::~PlatformPathFinder()
 {
 }
@@ -24,7 +22,7 @@ size_t PlatformPathFinder::Iterate(std::function<void(const FString&)> fFunction
 	}
 
 	intptr_t hFile = _wfindfirst((sCurrentFolder + _S("*")).c_str(), &oFindData);
-	if (hFile == INVALID_HANDLE_VALUE) return 0;
+	if (hFile == -1) return 0;
 
 	FString sMaskInternal(m_sMask);
 	if (m_sMask[0] == _S('*')) {

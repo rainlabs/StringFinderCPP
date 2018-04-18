@@ -22,12 +22,15 @@ public:
 	FString GetFindString() const;
 	FString GetOutputFile() const;
 	FileFormat GetOutputFormat() const;
+	// Enabled extended output (will write each found line with line number in output)
+	bool IsExtendedOutput() const;
+	// Show additional info at the end of performing
+	bool ShowInfo() const;
+	// Show usage help
+	bool ShowHelp() const;
 
 	// Check all parameters is valid to proceed
 	bool IsValid() const;
-
-	// Enabled extended output (will write each found line with line number in output)
-	bool IsExtendedOutput() const;
 
 	// Output config for easy debug
 	friend FStream & operator<<(FStream & oStream, const Configuration & oConfig);
@@ -43,4 +46,6 @@ private:
 	FString m_sOutputFile;   // Output file if existed
 	bool m_bOutputExtended;  // Flag: extended input enabled
 	bool m_bValidOutputFile; // Valid or not output file
+	bool m_bShowInfo;        // Show took time and files number
+	bool m_bShowHelp;        // Show usave commands
 };
