@@ -18,7 +18,11 @@ This project provides ability to search string in files for Windows and Linux OS
 -c      - Chunk count (0 - read line by line, otherwise - read block by block) incompatible with -a flag
 ```
 
-Example command `StringFinder.exe -p ..\ -m "*.cpp" -s "unsigned" -d -a`
+Example commands:
+
+`StringFinder.exe -p ..\ -m "*.cpp" -s "unsigned" -d -a`
+
+`StringFinder.exe -p ..\ -m "*.*" -i "String.txt" -d -b -c 100 -o "Result.txt"`
 
 ### Windows compile ###
 
