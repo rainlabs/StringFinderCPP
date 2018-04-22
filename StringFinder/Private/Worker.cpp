@@ -6,7 +6,7 @@
 
 Worker::Worker(const Configuration & oConfig, const FString & sFile) :
 	m_sFile(sFile),
-	m_oStringFinder(sFile),
+	m_oStringFinder(sFile, oConfig.GetOpenMode()),
 	m_pResultWriter(ResultWriter::CreateInstance(oConfig.GetOutputFile(), oConfig.GetOutputFormat())),
 	m_oConfig(oConfig)
 {
@@ -26,8 +26,8 @@ void Worker::Run()
 			m_pResultWriter->Commit();
 	}
 	else {
-		size_t uLine = m_oStringFinder.FindString(m_oConfig.GetFindString());
-		if (uLine > 0) {
+		size_t uLine(0);
+		if (m_oStringFinder.FindString(m_oConfig.GetFindString(), m_oConfig.GetChunkCount(), uLine)) {
 			m_pResultWriter->Commit();
 		}
 	}

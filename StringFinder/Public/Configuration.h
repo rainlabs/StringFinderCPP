@@ -28,6 +28,10 @@ public:
 	bool ShowInfo() const;
 	// Show usage help
 	bool ShowHelp() const;
+	// read file open mode
+	int GetOpenMode() const;
+	// Get Chunk count/mode
+	int GetChunkCount() const;
 
 	// Check all parameters is valid to proceed
 	bool IsValid() const;
@@ -48,4 +52,6 @@ private:
 	bool m_bValidOutputFile; // Valid or not output file
 	bool m_bShowInfo;        // Show took time and files number
 	bool m_bShowHelp;        // Show usave commands
+	bool m_bBinaryFlag;      // Should Read binary files
+	int  m_iChunkCount;      // chunk count for reading, 0 - line by line
 };

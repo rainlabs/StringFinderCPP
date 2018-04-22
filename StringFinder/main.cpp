@@ -27,8 +27,13 @@ int main(int argc, char* argv[])
 	// Iterate over all files to find string
 	size_t uFoundFiles(0);
 	float fDuration = Measurement::Measure([oConfig, &uFoundFiles]() {
+		size_t uProcessedFiles(0);
+
 		PathFinderPtr pFinder = PathFinder::CreateInstance(oConfig.GetPath(), oConfig.GetFileMask());
 		uFoundFiles = pFinder->Iterate([&](const FString& sFile) {
+			if (oConfig.ShowInfo() && oConfig.GetOutputFormat() != FileFormat::CONSOLE) {
+				COUT << _S("\r") << _S("Processed: ") << ++uProcessedFiles << _S(" files");
+			}
 			Worker oWorker(oConfig, sFile);
 			oWorker.Run();
 		});
@@ -36,6 +41,7 @@ int main(int argc, char* argv[])
 
 	// Simple measurement result
 	if (oConfig.ShowInfo()) {
+		Utils::WriteInConsole(_S("\n"));
 		Utils::WriteInConsole(STR_MEASURE, fDuration); 
 		Utils::WriteInConsole(STR_FOUND_FILES, uFoundFiles);
 	}

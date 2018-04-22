@@ -11,20 +11,23 @@
 class StringFinder
 {
 public:
-	StringFinder(const FString& sFile);
+	StringFinder(const FString& sFile, int iMode = FFile::in);
 	~StringFinder();
 
 	// input file is open
 	bool IsOpen() const;
 
-	// find only first match
-	size_t FindString(const FString& sSubString);
+	/* find only first match
+	* @return uRetLine - line number
+	*/
+	bool FindString(const FString& sSubString, int iChunkCount, size_t& uRetLine);
 
 	// iterate over all matches
 	void FindAllStrings(const FString& sSubString, std::function<void(const FString& sLine, size_t uLine)> fFunction);
 
 protected:
 	void ResetFile();
+	size_t FileSize();
 
 	FFile m_oFile;
 };

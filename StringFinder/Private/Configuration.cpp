@@ -3,28 +3,33 @@
 // Copyright 2018 All Rights Reserved.
 
 #include "Configuration.h"
+#include "Strings.h"
 
 Configuration::Configuration() :
-	m_sPath(_S("")),
-	m_sFileMask(_S("")),
-	m_sFindString(_S("")),
-	m_sOutputFile(_S("")),
+	m_sPath(STR_EMPTY),
+	m_sFileMask(STR_EMPTY),
+	m_sFindString(STR_EMPTY),
+	m_sOutputFile(STR_EMPTY),
 	m_bOutputExtended(false),
 	m_bValidOutputFile(false),
 	m_bShowInfo(false),
-	m_bShowHelp(false)
+	m_bShowHelp(false),
+	m_bBinaryFlag(false),
+	m_iChunkCount(0)
 {
 }
 
 Configuration::Configuration(int argc, char * argv[]) :
-	m_sPath(_S("")),
-	m_sFileMask(_S("")),
-	m_sFindString(_S("")),
-	m_sOutputFile(_S("")),
+	m_sPath(STR_EMPTY),
+	m_sFileMask(STR_EMPTY),
+	m_sFindString(STR_EMPTY),
+	m_sOutputFile(STR_EMPTY),
 	m_bOutputExtended(false),
 	m_bValidOutputFile(false),
 	m_bShowInfo(false),
-	m_bShowHelp(false)
+	m_bShowHelp(false),
+	m_bBinaryFlag(false),
+	m_iChunkCount(0)
 {
 	Initialize(argc, argv);
 }
@@ -36,6 +41,8 @@ Configuration::~Configuration()
 // TODO: write a decorator for parameters
 void Configuration::Initialize(int argc, char * argv[])
 {
+	FString sFindStringPath(STR_EMPTY);
+
 	for (int i = 0; i < argc; i++) {
 		FString sParam(PlatformUtils::StringFormat(argv[i]));
 
@@ -51,7 +58,7 @@ void Configuration::Initialize(int argc, char * argv[])
 				break;
 			case _S('i'):
 				if (i < (argc - 1) && m_sFindString.empty())
-					m_sFindString = ReadFindString(PlatformUtils::StringFormat(argv[++i]));
+					sFindStringPath = PlatformUtils::StringFormat(argv[++i]);
 				break;
 			case _S('s'):
 				if (i < (argc - 1) && m_sFindString.empty())
@@ -70,6 +77,15 @@ void Configuration::Initialize(int argc, char * argv[])
 			case _S('h'):
 				m_bShowHelp = true;
 				break;
+			case _S('b'):
+				m_bBinaryFlag = true;
+				break;
+			case _S('c'):
+				if (i < (argc - 1)) {
+					m_iChunkCount = std::stoi(PlatformUtils::StringFormat(argv[++i]));
+					m_iChunkCount = std::abs(m_iChunkCount);
+				}
+				break;
 			}
 		}
 	}
@@ -78,6 +94,9 @@ void Configuration::Initialize(int argc, char * argv[])
 	if (!m_sPath.empty() && m_sPath[m_sPath.size()-1] == _S('*')) {
 		m_sPath.resize(m_sPath.size() - 1);
 	}
+
+	if (!sFindStringPath.empty())
+		m_sFindString = ReadFindString(sFindStringPath);
 
     if(!m_sFindString.empty()) {
         Utils::rtrim(m_sFindString);
@@ -140,10 +159,24 @@ bool Configuration::ShowHelp() const
 	return m_bShowHelp;
 }
 
+int Configuration::GetOpenMode() const
+{
+	int iMode = FFile::in;
+	if (m_bBinaryFlag)
+		iMode |= FFile::binary;
+
+	return iMode;
+}
+
+int Configuration::GetChunkCount() const
+{
+	return m_iChunkCount;
+}
+
 FString Configuration::ReadFindString(const FString & sFile) const
 {
-	FFile oFile(sFile, std::fstream::in);
-	if (!oFile.is_open()) return _S("");
+	FFile oFile(sFile, GetOpenMode());
+	if (!oFile.is_open()) return STR_EMPTY;
 
 	// Raw copy from one buffer to other
 	FStringStream oStream;
