@@ -18,6 +18,8 @@ This project provides ability to search string in files for Windows and Linux OS
 -c      - Chunk count (0 - read line by line, otherwise - read block by block) incompatible with -a flag
 ```
 
+*Base Chunk(Block) size is search string size*
+
 Example commands:
 
 `StringFinder.exe -p ..\ -m "*.cpp" -s "unsigned" -d -a`
