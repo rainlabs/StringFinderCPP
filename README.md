@@ -8,13 +8,14 @@ This project provides ability to search string in files for Windows and Linux OS
 ```
 -p      - Path
 -m      - File mask
--p      - Path
 -i      - File with search string
 -s      - Search string
 -o      - Output file (write to console otherwise)
 -a      - Extended output (with lines and line numbers)
 -d      - Show stat info (time and file numbers)
 -h      - Show this help
+-b      - Read files with binary flag
+-c      - Chunk count (0 - read line by line, otherwise - read block by block) incompatible with -a flag
 ```
 
 Example command `StringFinder.exe -p ..\ -m "*.cpp" -s "unsigned" -d -a`
