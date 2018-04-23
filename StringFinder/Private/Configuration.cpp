@@ -91,7 +91,12 @@ void Configuration::Initialize(int argc, char * argv[])
 	}
 
 	// if we have something like this "path\*"
-	if (!m_sPath.empty() && m_sPath[m_sPath.size()-1] == _S('*')) {
+	if (!m_sPath.empty() && m_sPath[m_sPath.size() - 1] == _S('*')) {
+		m_sPath.resize(m_sPath.size() - 1);
+	}
+
+	// if we have something like this "path\"
+	if (!m_sPath.empty() && m_sPath[m_sPath.size() - 1] == _S('\\')) {
 		m_sPath.resize(m_sPath.size() - 1);
 	}
 
