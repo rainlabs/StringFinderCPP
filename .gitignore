@@ -67,4 +67,11 @@ DerivedDataCache/*
 *.VC.db
 Debug/*
 StringFinder/Debug/*
+StringFinderTEST/Debug/*
 .vs/*
+Test/*
+StringFinder/Test/*
+StringFinderTEST/Test/*
+x64/*
+StringFinder/x64/*
+StringFinderTEST/x64/*
