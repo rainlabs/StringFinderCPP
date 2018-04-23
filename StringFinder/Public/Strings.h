@@ -15,3 +15,6 @@ const FString STR_EMPTY = _S("");
 const FString STR_MEASURE = _S("Overal Time: ");
 const FString STR_FOUND_FILES = _S("Found files: ");
 const FString STR_INCORRECT_MASK = _S("Incorrect file mask");
+const FString STR_INFO_LOG = _S("INFO: ");
+const FString STR_DEBUG_LOG = _S("DEBUG: ");
+const FString STR_NL = _S("\n");

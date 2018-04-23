@@ -28,7 +28,7 @@ Example commands:
 
 ### Windows compile ###
 
-To commpile on windows, open *StringFinder.sln* and press build
+To compile on windows, open *StringFinder.sln* and press build
 
 ### Linux compile ###
 

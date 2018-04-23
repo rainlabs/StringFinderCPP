@@ -7,6 +7,7 @@
 #include "Worker.h"
 #include "Measurement.h"
 #include "Strings.h"
+#include "Logger.h"
 
 int main(int argc, char* argv[])
 {
@@ -18,21 +19,27 @@ int main(int argc, char* argv[])
 		return ErrorCode::SUCCESS;
 	}
 
+	// Construct logger
+	LoggerInterface* pLogger = new InfoLogger(nullptr);
+	if (oConfig.ShowInfo())
+		pLogger = new DebugLogger(pLogger);
+
 	// Check paramenters is valid
 	if (!oConfig.IsValid()) {
-		Utils::WriteInConsole(STR_INVALID_ARGUMENTS);
+		pLogger->Info(STR_INVALID_ARGUMENTS);
+		delete pLogger;
 		return ErrorCode::INVALID_ARGUMENTS;
 	}
 
 	// Iterate over all files to find string
 	size_t uFoundFiles(0);
-	float fDuration = Measurement::Measure([oConfig, &uFoundFiles]() {
+	float fDuration = Measurement::Measure([oConfig, &uFoundFiles, &pLogger]() {
 		size_t uProcessedFiles(0);
 
 		PathFinderPtr pFinder = PathFinder::CreateInstance(oConfig.GetPath(), oConfig.GetFileMask());
 		uFoundFiles = pFinder->Iterate([&](const FString& sFile) {
-			if (oConfig.ShowInfo() && oConfig.GetOutputFormat() != FileFormat::CONSOLE) {
-				COUT << _S("\r") << _S("Processed: ") << ++uProcessedFiles << _S(" files");
+			if (oConfig.GetOutputFormat() != FileFormat::CONSOLE) {
+				pLogger->Debug(_S("Processed: ") + PlatformUtils::StringFormat(std::to_string(++uProcessedFiles)) + _S(" files"));
 			}
 			Worker oWorker(oConfig, sFile);
 			oWorker.Run();
@@ -40,11 +47,10 @@ int main(int argc, char* argv[])
 	});
 
 	// Simple measurement result
-	if (oConfig.ShowInfo()) {
-		Utils::WriteInConsole(_S("\n"));
-		Utils::WriteInConsole(STR_MEASURE, fDuration); 
-		Utils::WriteInConsole(STR_FOUND_FILES, uFoundFiles);
-	}
+	pLogger->Debug(STR_NL);
+	pLogger->Debug(STR_MEASURE + PlatformUtils::StringFormat(std::to_string(fDuration)));
+	pLogger->Debug(STR_FOUND_FILES + PlatformUtils::StringFormat(std::to_string(uFoundFiles)));
 
+	delete pLogger;
 	return ErrorCode::SUCCESS;
 }
